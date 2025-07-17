@@ -22,4 +22,7 @@ phases:
       - cat ./imagedefinitions.json
       - ls -la
 artifacts:
-  files: imagedefinitions.json
+  files:
+    - imagedefinitions.json
+  base-directory: frontend
+
