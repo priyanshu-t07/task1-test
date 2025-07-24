@@ -5,7 +5,7 @@ resource "aws_vpc" "this" {
   }
 }
 
-//data "aws_availability_zones" "available" {}
+data "aws_availability_zones" "available" {}
 
 resource "aws_subnet" "public" {
   count                   = 2
