@@ -1,4 +1,4 @@
-/// FILE: src/App.jsx
+/* FILE: src/App.jsx*/
 import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
