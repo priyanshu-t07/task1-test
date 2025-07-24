@@ -1,4 +1,4 @@
-/// FILE: src/styles.css
+/*FILE: src/styles.css*/
 body[data-theme='dark'] {
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   color: white;
