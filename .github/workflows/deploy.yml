@@ -1,0 +1,38 @@
+name: Deploy Frontend to Pages Branch
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to main branch, change if needed
+    paths:
+      - 'frontend/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build app
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Deploy to GitHub Pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend/dist
+          publish_branch: YOUR_BRANCH_NAME   # <--- Set to your custom branch
