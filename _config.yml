@@ -1,0 +1,3 @@
+# _config.yml
+source: frontend/dist
+destination: ./_site
