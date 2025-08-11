@@ -1,4 +1,3 @@
-/// FILE: src/store.js
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -29,52 +28,33 @@ const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    playPause(state) {
-      state.isPlaying = !state.isPlaying
-    },
-    setTrack(state, action) {
+    playPause: state => { state.isPlaying = !state.isPlaying },
+    setTrack: (state, action) => {
       state.currentTrack = action.payload
       state.isPlaying = true
     },
-    nextTrack(state) {
-      if (state.shuffle) {
-        const randomIndex = Math.floor(Math.random() * state.playlist.length)
-        state.currentTrack = randomIndex
-      } else {
-        state.currentTrack = (state.currentTrack + 1) % state.playlist.length
-      }
+    nextTrack: state => {
+      state.currentTrack = state.shuffle
+        ? Math.floor(Math.random() * state.playlist.length)
+        : (state.currentTrack + 1) % state.playlist.length
     },
-    prevTrack(state) {
-      state.currentTrack = (state.currentTrack - 1 + state.playlist.length) % state.playlist.length
+    prevTrack: state => {
+      state.currentTrack =
+        (state.currentTrack - 1 + state.playlist.length) % state.playlist.length
     },
-    setVolume(state, action) {
-      state.volume = action.payload
-    },
-    toggleMute(state) {
-      state.isMuted = !state.isMuted
-    },
-    toggleShuffle(state) {
-      state.shuffle = !state.shuffle
-    },
-    toggleRepeat(state) {
-      state.repeat = !state.repeat
-    },
-    toggleTheme(state) {
-      state.theme = state.theme === 'dark' ? 'light' : 'dark'
-    }
+    setVolume: (state, action) => { state.volume = action.payload },
+    toggleMute: state => { state.isMuted = !state.isMuted },
+    toggleShuffle: state => { state.shuffle = !state.shuffle },
+    toggleRepeat: state => { state.repeat = !state.repeat },
+    toggleTheme: state => { state.theme = state.theme === 'dark' ? 'light' : 'dark' }
   }
 })
 
 export const {
-  playPause,
-  setTrack,
-  nextTrack,
-  prevTrack,
-  setVolume,
-  toggleMute,
-  toggleShuffle,
-  toggleRepeat,
-  toggleTheme
+  playPause, setTrack, nextTrack, prevTrack, setVolume,
+  toggleMute, toggleShuffle, toggleRepeat, toggleTheme
 } = playerSlice.actions
 
-export const store = configureStore({ reducer: { player: playerSlice.reducer } })
+export const store = configureStore({
+  reducer: { player: playerSlice.reducer }
+})
